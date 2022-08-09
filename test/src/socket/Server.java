@@ -1,6 +1,9 @@
 package socket;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -21,6 +24,11 @@ public class Server {
             System.out.println("等待客户端连接。。。");
             Socket socket = serverSocket.accept();
             System.out.println("一个客户连接了。。。");
+            InputStream in = socket.getInputStream();
+            InputStreamReader isr = new InputStreamReader(in);
+            BufferedReader bf = new BufferedReader(isr);
+            String line = bf.readLine();
+            System.out.println("客户端说："+ line);
         } catch (IOException e) {
             e.printStackTrace();
         }

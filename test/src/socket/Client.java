@@ -1,6 +1,6 @@
 package socket;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 public class Client {
@@ -17,6 +17,15 @@ public class Client {
     }
 
     public void start(){
+        try {
+            OutputStream out = socket.getOutputStream();
+            OutputStreamWriter osw = new OutputStreamWriter(out,"UTF-8");
+            BufferedWriter bw = new BufferedWriter(osw);
+            PrintWriter pw = new PrintWriter(bw,true);
+            pw.println("你好服务端");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
