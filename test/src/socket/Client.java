@@ -2,6 +2,7 @@ package socket;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Client {
     private Socket socket;
@@ -22,9 +23,22 @@ public class Client {
             OutputStreamWriter osw = new OutputStreamWriter(out,"UTF-8");
             BufferedWriter bw = new BufferedWriter(osw);
             PrintWriter pw = new PrintWriter(bw,true);
-            pw.println("你好服务端");
+            Scanner scanner = new Scanner(System.in);
+            while (true){
+                String line = scanner.nextLine();
+                if("exit".equals(line)){
+                    break;
+                }
+                pw.println(line);
+            }
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            try{
+                socket.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }
 
     }

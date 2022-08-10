@@ -21,14 +21,19 @@ public class Server {
     }
     public void start(){
         try {
-            System.out.println("等待客户端连接。。。");
-            Socket socket = serverSocket.accept();
-            System.out.println("一个客户连接了。。。");
-            InputStream in = socket.getInputStream();
-            InputStreamReader isr = new InputStreamReader(in);
-            BufferedReader bf = new BufferedReader(isr);
-            String line = bf.readLine();
-            System.out.println("客户端说："+ line);
+            while(true){
+                System.out.println("等待客户端连接。。。");
+                Socket socket = serverSocket.accept();
+                System.out.println("一个客户连接了。。。");
+            }
+
+//            InputStream in = socket.getInputStream();
+//            InputStreamReader isr = new InputStreamReader(in);
+//            BufferedReader bf = new BufferedReader(isr);
+//            String message;
+//            while ((message=bf.readLine())!=null){
+//                System.out.println("客户端说："+ message);
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
