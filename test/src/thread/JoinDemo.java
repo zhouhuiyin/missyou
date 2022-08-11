@@ -3,7 +3,7 @@ package thread;
 public class JoinDemo {
     private static boolean isFinish = false;
     public static void main(String[] args) {
-        Thread dowload = new Thread(){
+        Thread download = new Thread(){
             public void run(){
                 System.out.println("down:开始下载图片....");
                 for(int i=1;i<=100;i++){
@@ -30,7 +30,7 @@ public class JoinDemo {
                 System.out.println("列表中的文字显示完毕");
                 System.out.println("开始显示图片。。。");
                 try {
-                    dowload.join();
+                    download.join();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -41,7 +41,7 @@ public class JoinDemo {
             }
         };
 
-        dowload.start();
+        download.start();
         show.start();
     }
 
