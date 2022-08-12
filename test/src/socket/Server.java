@@ -3,9 +3,11 @@ package socket;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Server {
     private ServerSocket serverSocket;
+    private PrintWriter[] allOut = {};
     public Server(){
         try {
             System.out.println("正在启动服务端。。。");
@@ -63,6 +65,10 @@ public class Server {
                 BufferedWriter bw = new BufferedWriter(osw);
                 //按行写出字符串，自动行刷新
                 PrintWriter pw = new PrintWriter(bw,true);
+                //扩容
+                allOut = Arrays.copyOf(allOut,allOut.length+1);
+                //将输出流存入数组最后一个位置
+                allOut[allOut.length-1] = pw;
 
                 String message;
                 while ((message = bf.readLine()) != null) {
