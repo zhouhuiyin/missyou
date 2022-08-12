@@ -23,6 +23,12 @@ public class Client {
             OutputStreamWriter osw = new OutputStreamWriter(out,"UTF-8");
             BufferedWriter bw = new BufferedWriter(osw);
             PrintWriter pw = new PrintWriter(bw,true);
+            //通过socket获取输入流获取服务端发送过来的消息
+            BufferedReader bf = new BufferedReader(
+                    new InputStreamReader(
+                            socket.getInputStream()
+                    )
+            );
             Scanner scanner = new Scanner(System.in);
             while (true){
                 String line = scanner.nextLine();
@@ -30,6 +36,8 @@ public class Client {
                     break;
                 }
                 pw.println(line);
+                line = bf.readLine();//读取服务端发送过来的字符串
+                System.out.println(socket.getInetAddress().getHostAddress()+"服务端说："+ line);
             }
         } catch (IOException e) {
             e.printStackTrace();

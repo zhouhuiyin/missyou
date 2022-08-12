@@ -1,9 +1,6 @@
 package socket;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -54,11 +51,24 @@ public class Server {
         public void run(){
             try{
                 InputStream in = socket.getInputStream();
+                //转换流，衔接字符与字节流，将读取的字节流转换为字符
                 InputStreamReader isr = new InputStreamReader(in);
+                //缓冲流，块读文本数据加速，按行读取字符串
                 BufferedReader bf = new BufferedReader(isr);
+                //通过socket获取输出流用于给客户端回复消息
+                OutputStream out = socket.getOutputStream();
+                //转换流，负责衔接字符与字节流，将写出的字符转换为字节
+                OutputStreamWriter osw = new OutputStreamWriter(out,"utf-8");
+                //缓冲流，负责块写文本数据加速
+                BufferedWriter bw = new BufferedWriter(osw);
+                //按行写出字符串，自动行刷新
+                PrintWriter pw = new PrintWriter(bw,true);
+
                 String message;
                 while ((message = bf.readLine()) != null) {
                     System.out.println(host +"客户端说：" + message);
+                    //将消息回复给客户端
+                    pw.println(host+"说："+message);
                 }
             }catch (IOException e){
                 e.printStackTrace();
