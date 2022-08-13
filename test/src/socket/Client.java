@@ -19,16 +19,15 @@ public class Client {
 
     public void start(){
         try {
+            //启动用于读取服务器端发送过来的消息线程
+            ServerHandler handler = new ServerHandler();
+            Thread t = new Thread(handler);
+            t.start();
             OutputStream out = socket.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(out,"UTF-8");
             BufferedWriter bw = new BufferedWriter(osw);
             PrintWriter pw = new PrintWriter(bw,true);
-            //通过socket获取输入流获取服务端发送过来的消息
-            BufferedReader bf = new BufferedReader(
-                    new InputStreamReader(
-                            socket.getInputStream()
-                    )
-            );
+
             Scanner scanner = new Scanner(System.in);
             while (true){
                 String line = scanner.nextLine();
@@ -36,8 +35,6 @@ public class Client {
                     break;
                 }
                 pw.println(line);
-                line = bf.readLine();//读取服务端发送过来的字符串
-                System.out.println(socket.getInetAddress().getHostAddress()+"服务端说："+ line);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,4 +52,25 @@ public class Client {
         Client client = new Client();
         client.start();
     }
+
+    private class ServerHandler implements Runnable{
+        //通过socket获取输入流获取服务端发送过来的消息
+        public void run(){
+            try {
+                BufferedReader bf = new BufferedReader(
+                        new InputStreamReader(
+                                socket.getInputStream()
+                        )
+                );
+                String message;
+                while((message = bf.readLine())!=null){
+                    System.out.println(message);
+                }
+            } catch (IOException e) {
+                //throw new RuntimeException(e);
+            }
+        }
+    }
+
+
 }

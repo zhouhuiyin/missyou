@@ -70,14 +70,30 @@ public class Server {
                 //将输出流存入数组最后一个位置
                 allOut[allOut.length-1] = pw;
 
+                System.out.println(host+"上线了，当前人数："+allOut.length);
+
                 String message;
                 while ((message = bf.readLine()) != null) {
                     System.out.println(host +"客户端说：" + message);
-                    //将消息回复给客户端
-                    pw.println(host+"说："+message);
+                    //将消息回复给所有客户端
+                    for(int i = 0;i< allOut.length;i++){
+                        allOut[i].println(host+"说："+message);
+                    }
                 }
             }catch (IOException e){
-                e.printStackTrace();
+                //e.printStackTrace();
+            }finally {
+                //处理客户端断开连接后的操作
+
+                //将当前客户端的输出流从共享数组allOut中删除
+
+
+                try {
+                    socket.close();//与客户端断开连接释放资源
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
