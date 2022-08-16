@@ -71,7 +71,7 @@ public class Server {
                 //按行写出字符串，自动行刷新
                 pw = new PrintWriter(bw,true);
                 //扩容
-                synchronized (Server.this){
+                synchronized (allOut){
                     //allOut = Arrays.copyOf(allOut,allOut.length+1);
                     //将输出流存入数组最后一个位置
                     //allOut[allOut.length-1] = pw;
@@ -92,7 +92,7 @@ public class Server {
             }finally {
                 //处理客户端断开连接后的操作
                 //将当前客户端的输出流从共享数组allOut中删除
-                synchronized (Server.this){
+                synchronized (allOut){
                     allOut.remove(pw);
 //                    for(int i=0;i<allOut.length;i++){
 //                        if (allOut[i]==pw) {
@@ -118,7 +118,7 @@ public class Server {
          * @param message
          */
         private void sendMessage(String message){
-            synchronized (Server.this){
+            synchronized (allOut){
 //                for(int i = 0;i< allOut.length;i++){
 //                    allOut[i].println(message);
 //                }
