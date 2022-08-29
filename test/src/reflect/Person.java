@@ -36,6 +36,10 @@ public class Person {
         }
     }
 
+    private void hehe(){
+        System.out.println("我是Person中的私有方法！");
+    }
+
     @Override
     public String toString() {
         return "Person{" +
