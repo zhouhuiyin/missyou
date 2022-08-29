@@ -14,6 +14,7 @@ public class Person {
         this.name = name;
         this.age = age;
     }
+    @AutoRun
     public void sayHello(){
         System.out.println("Person:hello!");
     }
@@ -22,6 +23,7 @@ public class Person {
         System.out.println("Person:sayGoodBye!");
     }
 
+    @AutoRun
     public void watchTV(){
         System.out.println("Person:看电视");
     }
