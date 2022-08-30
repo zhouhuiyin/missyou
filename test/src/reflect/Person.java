@@ -2,7 +2,7 @@ package reflect;
 
 
 import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
-
+@AutoRunClass
 public class Person {
     private String name = "张三";
     private int age = 22;
@@ -14,7 +14,7 @@ public class Person {
         this.name = name;
         this.age = age;
     }
-    @AutoRun
+    @AutoRun(5)
     public void sayHello(){
         System.out.println("Person:hello!");
     }
@@ -23,7 +23,7 @@ public class Person {
         System.out.println("Person:sayGoodBye!");
     }
 
-    @AutoRun
+    @AutoRun(3)
     public void watchTV(){
         System.out.println("Person:看电视");
     }
