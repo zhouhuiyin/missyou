@@ -6,13 +6,11 @@ package thread;
 public class ThreadDemo3 {
     public static void main(String[] args) {
         //第一种方式：继承Thread重写run方法
-        Thread t1 = new Thread() {
-                public void run(){
-                    for(int i=0;i<1000;i++){
-                        System.out.println("你是谁呀？");
-                    }
-                }
-        };
+        Thread t1 = new Thread(() -> {
+            for(int i=0;i<1000;i++){
+                System.out.println("你是谁呀？");
+            }
+        });
 
         //第二种：实现Runnable接口重写run方法单独定义任务
         Runnable r2 = new Runnable() {
