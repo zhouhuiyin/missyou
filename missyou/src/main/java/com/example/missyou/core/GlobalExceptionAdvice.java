@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionAdvice {
     @ExceptionHandler(value=Exception.class)
     public void handleException(HttpServletRequest req, Exception e){
-        System.out.println("hello");
+        System.out.println(e);
     }
 
 }
