@@ -1,5 +1,6 @@
 package com.example.missyou.api.v1;
 
+import com.example.missyou.exception.http.NotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class BannerController {
     @GetMapping("/test")
     public String test() throws Exception {
-        throw new Exception("这里出错了");
+//        throw new Exception("这里出错了");
 //        return "hello world";
+        throw  new NotFoundException(10001);
     }
 }
