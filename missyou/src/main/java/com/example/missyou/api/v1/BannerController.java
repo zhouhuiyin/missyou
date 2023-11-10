@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.awt.*;
 
 @RestController
-@RequestMapping("/v1/banner")
+@RequestMapping("/banner")
 public class BannerController {
     @GetMapping("/test")
     public String test() throws Exception {
