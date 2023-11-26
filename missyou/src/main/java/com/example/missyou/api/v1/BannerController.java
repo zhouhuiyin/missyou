@@ -27,7 +27,9 @@ public class BannerController {
 
     }
     @PostMapping("/test/{id}")
-    public PersonDTO test(@PathVariable @Range(min = 1,max = 10,message = "不可以超过10") Integer id, @RequestParam @Length(min = 8) String name, @RequestBody @Validated PersonDTO person) throws Exception {
+    public PersonDTO test(@PathVariable @Range(min = 1,max = 10,message = "不可以超过10") Integer id,
+                          @RequestParam @Length(min = 8) String name,
+                          @RequestBody @Validated PersonDTO person) throws Exception {
 //        throw new Exception("这里出错了");
 //        return "hello world";
 //        PersonDTO dto = new PersonDTO();
